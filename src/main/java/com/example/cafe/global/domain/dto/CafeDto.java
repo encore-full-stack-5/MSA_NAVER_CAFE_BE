@@ -1,6 +1,6 @@
 package com.example.cafe.global.domain.dto;
 
-import jakarta.persistence.Column;
+import java.time.LocalDateTime;
 
 public record CafeDto(
         Long id,
@@ -10,10 +10,10 @@ public record CafeDto(
         Boolean useNameOption,
         String description,
         Long managerId,
-        String createdAt, //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
         Boolean joinQuestionYn,
         String joinQuestion,
-        String address
+        String address,
+        LocalDateTime date
 
         ) {
 }

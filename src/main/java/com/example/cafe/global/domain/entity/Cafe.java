@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,13 +31,13 @@ public class Cafe {
     private String description;
     @Column(name = "MANAGER_ID")
     private Long managerId;
-    @Column(name = "CREATED_AT")
-    private String createdAt; //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
     @Column(name = "JOIN_QUESTION_YN")
     private Boolean joinQuestionYn;
     @Column(name = "JOIN_QUESTION")
     private String joinQuestion;
     @Column(name = "ADDRESS")
     private String address;
+    @Column(name = "CREATED_AT")
+    private LocalDateTime createdAt; //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
 }
 
