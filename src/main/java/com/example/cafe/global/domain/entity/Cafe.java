@@ -1,18 +1,15 @@
 package com.example.cafe.global.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "CAFES")
 public class Cafe {
     @Id
@@ -37,7 +34,11 @@ public class Cafe {
     private String joinQuestion;
     @Column(name = "ADDRESS")
     private String address;
+    @Column(name = "CAFE_RANK")
+    private String cafeRank;
+    @Column(name = "RANK_USE_YN")
+    private Boolean rankUseYn;
     @Column(name = "CREATED_AT")
-    private LocalDateTime createdAt; //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
+    private LocalDateTime createdAt;
 }
 

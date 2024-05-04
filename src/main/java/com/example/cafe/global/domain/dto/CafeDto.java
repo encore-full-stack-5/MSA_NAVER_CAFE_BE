@@ -13,6 +13,8 @@ public record CafeDto(
         Boolean joinQuestionYn,
         String joinQuestion,
         String address,
+        String cafeRank,
+        Boolean rankUseYn,
         LocalDateTime date
 
         ) {

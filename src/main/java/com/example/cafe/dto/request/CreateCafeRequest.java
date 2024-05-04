@@ -11,25 +11,27 @@ public record CreateCafeRequest (
         Boolean useNameOption,
         String description,
         Long managerId,
-        String createdAt, //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
+        String createdAt,
         Boolean joinQuestionYn,
         String joinQuestion,
         String address
 
 ){
     public Cafe toEntity(){
-        return new Cafe(
-                null,
-                name,
-                icon,
-                visibility,
-                useNameOption,
-                description,
-                managerId,
-                joinQuestionYn,
-                joinQuestion,
-                address,
-                LocalDateTime.now()
-        );
+        return Cafe.builder()
+                .id(null)
+                .name(name)
+                .icon(icon)
+                .visibility(visibility)
+                .useNameOption(useNameOption)
+                .description(description)
+                .managerId(managerId)
+                .joinQuestionYn(joinQuestionYn)
+                .joinQuestion(joinQuestion)
+                .address(address)
+                .cafeRank("새싹")
+                .rankUseYn(false)
+                .createdAt(LocalDateTime.now())
+                .build();
     }
 }
