@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -42,6 +41,9 @@ public class Cafe {
     @Column(name = "RANK_USE_YN")
     private Boolean rankUseYn;
     @Column(name = "CREATED_AT")
-    private LocalDateTime createdAt; //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "cafe")
+    private List<Rank> ranks;
 }
 
