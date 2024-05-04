@@ -37,6 +37,10 @@ public class Cafe {
     private String joinQuestion;
     @Column(name = "ADDRESS")
     private String address;
+    @Column(name = "CAFE_RANK")
+    private String cafeRank;
+    @Column(name = "RANK_USE_YN")
+    private Boolean rankUseYn;
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt; //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
 }

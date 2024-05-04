@@ -11,7 +11,7 @@ public record CreateCafeRequest (
         Boolean useNameOption,
         String description,
         Long managerId,
-        String createdAt, //테스트 하기 편하도록 String으로 임의로 바꿔 놓음 -> 추후 DATE로 변환 필요
+        String createdAt,
         Boolean joinQuestionYn,
         String joinQuestion,
         String address
@@ -29,6 +29,8 @@ public record CreateCafeRequest (
                 joinQuestionYn,
                 joinQuestion,
                 address,
+                "새싹",
+                false,
                 LocalDateTime.now()
         );
     }
