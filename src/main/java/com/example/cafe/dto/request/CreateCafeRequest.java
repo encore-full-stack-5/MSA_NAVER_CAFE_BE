@@ -18,20 +18,20 @@ public record CreateCafeRequest (
 
 ){
     public Cafe toEntity(){
-        return new Cafe(
-                null,
-                name,
-                icon,
-                visibility,
-                useNameOption,
-                description,
-                managerId,
-                joinQuestionYn,
-                joinQuestion,
-                address,
-                "새싹",
-                false,
-                LocalDateTime.now()
-        );
+        return Cafe.builder()
+                .id(null)
+                .name(name)
+                .icon(icon)
+                .visibility(visibility)
+                .useNameOption(useNameOption)
+                .description(description)
+                .managerId(managerId)
+                .joinQuestionYn(joinQuestionYn)
+                .joinQuestion(joinQuestion)
+                .address(address)
+                .cafeRank("새싹")
+                .rankUseYn(false)
+                .createdAt(LocalDateTime.now())
+                .build();
     }
 }

@@ -1,17 +1,15 @@
 package com.example.cafe.global.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "CAFES")
 public class Cafe {
     @Id
@@ -42,8 +40,5 @@ public class Cafe {
     private Boolean rankUseYn;
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "cafe")
-    private List<Rank> ranks;
 }
 
