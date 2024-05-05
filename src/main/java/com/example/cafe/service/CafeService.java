@@ -9,5 +9,6 @@ public interface CafeService {
     void createCafe(CafeRequest request);
 
     List<CafeResponse> getAllCafeByManagerId(Long uid);
+    List<CafeResponse> getAllCafeByCafeName(String query);
     CafeResponse getCafeByCafeId(Long cafeId);
 }

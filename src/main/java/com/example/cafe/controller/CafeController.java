@@ -13,19 +13,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CafeController {
     private final CafeService cafeService;
+//    카페 생성
     @PostMapping
     public void createCafe(@RequestBody CafeRequest request){
         cafeService.createCafe(request);
     }
-
+//    Cafe Id로 카페 검색
     @GetMapping("/{cafeId}")
     public CafeResponse getCafeByCafeId(@PathVariable("cafeId") Long cafeId){
         return cafeService.getCafeByCafeId(cafeId);
     }
-
+//    Manager Id로 카페 검색
     @GetMapping("/managers/{uid}")
-    public List<CafeResponse> getCafeByUserId(@PathVariable("uid") Long uid){
+    public List<CafeResponse> getCafesByUserId(@PathVariable("uid") Long uid){
         return cafeService.getAllCafeByManagerId(uid);
+    }
+//    카페 이름으로 카페 검색 -> 최신순으로 반환
+    @GetMapping("/search")
+    public List<CafeResponse> searchCafesByName(@RequestParam(value = "query", required = true) String query){ //Model
+        return cafeService.getAllCafeByCafeName(query);
     }
 
 }

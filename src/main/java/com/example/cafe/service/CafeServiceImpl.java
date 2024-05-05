@@ -35,6 +35,14 @@ public class CafeServiceImpl implements CafeService {
                 .map(CafeResponse::from)
                 .toList();
     }
+//    Cafe 이름으로 검색 (포함되어 있는 Cafe 가져오기)
+    @Override
+    public List<CafeResponse> getAllCafeByCafeName(String query) {
+        return cafeRepository.findAllByNameContainingOrderByCreatedAtDesc(query)
+                .stream()
+                .map(CafeResponse::from)
+                .toList();
+    }
 
 //    cafeId로 cafe 하나 가져오기
     @Transactional
@@ -44,6 +52,4 @@ public class CafeServiceImpl implements CafeService {
         Cafe cafe = byCafeId.orElseThrow(()-> new CafeException(CafeErrorCode.CAFE_NOT_FOUND));
         return CafeResponse.from(cafe);
     }
-
-
 }

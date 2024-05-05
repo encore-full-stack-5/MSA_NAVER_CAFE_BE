@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CafeRepository extends JpaRepository<Cafe,Long> {
     List<Cafe> findByManagerId(Long managerId);
+    List<Cafe> findAllByNameContainingOrderByCreatedAtDesc(String query);
 }
