@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/cafe")
+@RequestMapping("/api/v1/cafes")
 @RequiredArgsConstructor
 public class CafeController {
     private final CafeService cafeService;
@@ -17,9 +17,15 @@ public class CafeController {
     public void createCafe(@RequestBody CafeRequest request){
         cafeService.createCafe(request);
     }
-    @GetMapping("/{uid}")
+
+    @GetMapping("/{cafeId}")
+    public CafeResponse getCafeByCafeId(@PathVariable("cafeId") Long cafeId){
+        return cafeService.getCafeByCafeId(cafeId);
+    }
+
+    @GetMapping("/managers/{uid}")
     public List<CafeResponse> getCafeByUserId(@PathVariable("uid") Long uid){
-        return cafeService.getAllCafeByUserId(uid);
+        return cafeService.getAllCafeByManagerId(uid);
     }
 
 }
