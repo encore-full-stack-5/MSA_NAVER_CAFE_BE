@@ -4,7 +4,7 @@ import com.example.cafe.global.domain.entity.Cafe;
 
 import java.time.LocalDateTime;
 
-public record CreateCafeRequest (
+public record CafeRequest(
         String name,
         String icon,
         Boolean visibility,
