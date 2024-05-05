@@ -14,6 +14,8 @@ public record CafeResponse(
         Boolean joinQuestionYn,
         String joinQuestion,
         String address,
+        String mainCategory,
+        String subCategory,
         LocalDateTime createdAt
 
 ) {
@@ -28,6 +30,8 @@ public record CafeResponse(
                 cafe.getJoinQuestionYn(),
                 cafe.getJoinQuestion(),
                 cafe.getAddress(),
+                cafe.getMainCategory(),
+                cafe.getSubCategory(),
                 cafe.getCreatedAt()
         );
     }

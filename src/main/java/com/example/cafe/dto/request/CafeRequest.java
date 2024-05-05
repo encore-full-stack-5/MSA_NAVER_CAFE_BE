@@ -1,6 +1,7 @@
 package com.example.cafe.dto.request;
 
 import com.example.cafe.global.domain.entity.Cafe;
+import com.example.cafe.global.domain.entity.RankType;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +15,8 @@ public record CafeRequest(
         String createdAt,
         Boolean joinQuestionYn,
         String joinQuestion,
+        String mainCategory,
+        String subCategory,
         String address
 
 ){
@@ -29,9 +32,11 @@ public record CafeRequest(
                 .joinQuestionYn(joinQuestionYn)
                 .joinQuestion(joinQuestion)
                 .address(address)
-                .cafeRank("새싹")
+                .cafeRank(RankType.SEED)
                 .rankUseYn(false)
                 .createdAt(LocalDateTime.now())
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
                 .build();
     }
 }
