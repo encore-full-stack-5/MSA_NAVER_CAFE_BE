@@ -34,8 +34,12 @@ public class Cafe {
     private String joinQuestion;
     @Column(name = "ADDRESS")
     private String address;
-    @Column(name = "CAFE_RANK")
-    private String cafeRank;
+    @Column(name = "MAIN_CATEGORY")
+    private String mainCategory;
+    @Column(name = "SUB_CATEGORY")
+    private String subCategory;
+    @Enumerated(EnumType.STRING)
+    private RankType cafeRank;
     @Column(name = "RANK_USE_YN")
     private Boolean rankUseYn;
     @Column(name = "CREATED_AT")
