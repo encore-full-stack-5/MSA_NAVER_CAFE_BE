@@ -8,5 +8,6 @@ import java.util.List;
 public interface CafeService {
     void createCafe(CafeRequest request);
 
-    List<CafeResponse> getAllCafeByUserId(Long uid);
+    List<CafeResponse> getAllCafeByManagerId(Long uid);
+    CafeResponse getCafeByCafeId(Long cafeId);
 }
