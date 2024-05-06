@@ -17,13 +17,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CafeServiceImpl implements CafeService {
     private final CafeRepository cafeRepository;
+    private final MemberLevelService memberLevelService;
 
 //    카페 생성
     @Transactional
     @Override
     public void createCafe(CafeRequest request) {
+        // 카페 생성
         Cafe cafeEntity = request.toEntity();
-        cafeRepository.save(cafeEntity);
+        Cafe savedCafe = cafeRepository.save(cafeEntity);
+        // 카페 생성 후 default MemberLevel 테이블 생성
+        memberLevelService.createDefaultMemberLevel(savedCafe);
     }
 
 //    managerId로 모든 카페리스트 가져오기 ( 내가 Manager인 카페 보기)
