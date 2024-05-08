@@ -35,8 +35,9 @@ public class CafeController {
     }
 //    카페 이름으로 카페 검색 -> 최신순으로 반환
     @GetMapping("/search")
-    public List<CafeResponse> searchCafesByName(@RequestParam(value = "query", required = true) String query){
-        return cafeService.getAllCafeByCafeName(query);
+    public Page<CafeResponse> searchCafesByName(@RequestParam(value = "query", required = true) String query,
+                                                @PageableDefault(size = 4,page = 0,sort = "createdAt",direction = Sort.Direction.DESC) Pageable pageRequest){
+        return cafeService.getAllCafeByCafeName(query,pageRequest);
     }
 
 }
