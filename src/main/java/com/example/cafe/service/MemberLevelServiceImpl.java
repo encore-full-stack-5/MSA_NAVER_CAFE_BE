@@ -2,10 +2,13 @@ package com.example.cafe.service;
 
 import com.example.cafe.dto.request.MemberLevelRequest;
 import com.example.cafe.dto.request.MemberLevelsRequest;
+import com.example.cafe.excrption.CafeErrorCode;
+import com.example.cafe.excrption.CafeException;
 import com.example.cafe.excrption.MemberLevelErrorCode;
 import com.example.cafe.excrption.MemberLevelException;
 import com.example.cafe.global.domain.entity.Cafe;
 import com.example.cafe.global.domain.entity.MemberLevel;
+import com.example.cafe.global.domain.repository.CafeRepository;
 import com.example.cafe.global.domain.repository.MemberLevelRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberLevelServiceImpl implements MemberLevelService {
     private final MemberLevelRepository memberLevelRepository;
+    private final CafeRepository cafeRepository;
+
     @Transactional
     @Override
     public void createDefaultMemberLevel(Cafe cafe) {
@@ -47,6 +52,13 @@ public class MemberLevelServiceImpl implements MemberLevelService {
 
     @Override
     public void updateMemberLevels(Long cafeId, MemberLevelsRequest memberLevels) {
+        // 멤버 등급 update를 하면 멤버 등급 YN을 Y로 업데이트 후 실행
+        // 이렇게 cafeRepository로 직접 접근하는게 맞는 방식인지?
+
+        Cafe cafe = cafeRepository.findById(cafeId).orElseThrow(() -> new CafeException(CafeErrorCode.CAFE_NOT_FOUND));
+        cafe.setRankUseYn(true);
+        cafeRepository.save(cafe);
+
         memberLevels.levels().forEach(levelRequest -> {
             Optional<MemberLevel> optionalMemberLevel = Optional.of(memberLevelRepository.findByPriorityAndCafe_Id(levelRequest.priority(), cafeId));
             MemberLevel memberLevel = optionalMemberLevel.orElseThrow(() -> new MemberLevelException(MemberLevelErrorCode.MEMBER_LEVEL_NOT_FOUND));
@@ -55,6 +67,4 @@ public class MemberLevelServiceImpl implements MemberLevelService {
             memberLevelRepository.save(memberLevel);
         });
     }
-
-
 }
