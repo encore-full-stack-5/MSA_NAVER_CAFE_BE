@@ -40,7 +40,7 @@ public class Cafe {
     private String subCategory;
     @Enumerated(EnumType.STRING)
     private RankType cafeRank;
-    @Column(name = "RANK_USE_YN")
+    @Column(name = "RANK_USE_YN") @Setter
     private Boolean rankUseYn;
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
