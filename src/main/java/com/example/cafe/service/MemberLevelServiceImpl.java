@@ -1,5 +1,9 @@
 package com.example.cafe.service;
 
+import com.example.cafe.dto.request.MemberLevelRequest;
+import com.example.cafe.dto.request.MemberLevelsRequest;
+import com.example.cafe.excrption.MemberLevelErrorCode;
+import com.example.cafe.excrption.MemberLevelException;
 import com.example.cafe.global.domain.entity.Cafe;
 import com.example.cafe.global.domain.entity.MemberLevel;
 import com.example.cafe.global.domain.repository.MemberLevelRepository;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,4 +44,17 @@ public class MemberLevelServiceImpl implements MemberLevelService {
         }
         memberLevelRepository.saveAll(defaultMemberLevel);
     }
+
+    @Override
+    public void updateMemberLevels(Long cafeId, MemberLevelsRequest memberLevels) {
+        memberLevels.levels().forEach(levelRequest -> {
+            Optional<MemberLevel> optionalMemberLevel = Optional.of(memberLevelRepository.findByPriorityAndCafe_Id(levelRequest.priority(), cafeId));
+            MemberLevel memberLevel = optionalMemberLevel.orElseThrow(() -> new MemberLevelException(MemberLevelErrorCode.MEMBER_LEVEL_NOT_FOUND));
+            memberLevel.setName(levelRequest.name());
+            memberLevel.setDescription(levelRequest.description());
+            memberLevelRepository.save(memberLevel);
+        });
+    }
+
+
 }
