@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface CafeRepository extends JpaRepository<Cafe,Long> {
     Page<Cafe> findByManagerId(Long managerId, Pageable pageRequest);
-    List<Cafe> findAllByNameContainingOrderByCreatedAtDesc(String query);
+    Page<Cafe> findAllByNameContainingOrderByCreatedAtDesc(String query, Pageable pageRequest);
 }

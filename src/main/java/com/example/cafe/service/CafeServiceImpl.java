@@ -41,11 +41,9 @@ public class CafeServiceImpl implements CafeService {
     }
 //    Cafe 이름으로 검색 (포함되어 있는 Cafe 가져오기)
     @Override
-    public List<CafeResponse> getAllCafeByCafeName(String query) {
-        return cafeRepository.findAllByNameContainingOrderByCreatedAtDesc(query)
-                .stream()
-                .map(CafeResponse::from)
-                .toList();
+    public Page<CafeResponse> getAllCafeByCafeName(String query,Pageable pageRequest) {
+        Page<Cafe> allCafes = cafeRepository.findAllByNameContainingOrderByCreatedAtDesc(query, pageRequest);
+        return allCafes.map(CafeResponse::from);
     }
 
 //    cafeId로 cafe 하나 가져오기
