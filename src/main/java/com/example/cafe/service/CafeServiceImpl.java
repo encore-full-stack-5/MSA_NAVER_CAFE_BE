@@ -8,6 +8,8 @@ import com.example.cafe.global.domain.entity.Cafe;
 import com.example.cafe.global.domain.repository.CafeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,11 +35,9 @@ public class CafeServiceImpl implements CafeService {
 //    managerId로 모든 카페리스트 가져오기 ( 내가 Manager인 카페 보기)
     @Transactional
     @Override
-    public List<CafeResponse> getAllCafeByManagerId(Long managerId) {
-        return cafeRepository.findByManagerId(managerId)
-                .stream()
-                .map(CafeResponse::from)
-                .toList();
+    public Page<CafeResponse> getAllCafeByManagerId(Long managerId, Pageable pageRequest) {
+        Page<Cafe> allCafes = cafeRepository.findByManagerId(managerId,pageRequest);
+        return allCafes.map(CafeResponse::from);
     }
 //    Cafe 이름으로 검색 (포함되어 있는 Cafe 가져오기)
     @Override
