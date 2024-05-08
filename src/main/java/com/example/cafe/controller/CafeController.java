@@ -4,6 +4,10 @@ import com.example.cafe.dto.request.CafeRequest;
 import com.example.cafe.dto.response.CafeResponse;
 import com.example.cafe.service.CafeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +29,9 @@ public class CafeController {
     }
 //    Manager Id로 카페 검색
     @GetMapping
-    public List<CafeResponse> getCafesByUserId(@RequestParam(value = "uid", required = true) Long uid){
-        return cafeService.getAllCafeByManagerId(uid);
+    public Page<CafeResponse> getCafesByUserId(@RequestParam(value = "uid", required = true) Long uid,
+                                               @PageableDefault(size =4, page = 0,sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageRequest){
+        return cafeService.getAllCafeByManagerId(uid,pageRequest);
     }
 //    카페 이름으로 카페 검색 -> 최신순으로 반환
     @GetMapping("/search")
