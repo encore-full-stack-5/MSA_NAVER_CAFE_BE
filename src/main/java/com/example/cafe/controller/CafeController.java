@@ -24,13 +24,13 @@ public class CafeController {
         return cafeService.getCafeByCafeId(cafeId);
     }
 //    Manager Id로 카페 검색
-    @GetMapping("/managers/{uid}")
-    public List<CafeResponse> getCafesByUserId(@PathVariable("uid") Long uid){
+    @GetMapping
+    public List<CafeResponse> getCafesByUserId(@RequestParam(value = "uid", required = true) Long uid){
         return cafeService.getAllCafeByManagerId(uid);
     }
 //    카페 이름으로 카페 검색 -> 최신순으로 반환
     @GetMapping("/search")
-    public List<CafeResponse> searchCafesByName(@RequestParam(value = "query", required = true) String query){ //Model
+    public List<CafeResponse> searchCafesByName(@RequestParam(value = "query", required = true) String query){
         return cafeService.getAllCafeByCafeName(query);
     }
 
