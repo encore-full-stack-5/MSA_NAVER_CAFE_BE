@@ -2,8 +2,7 @@ package com.example.cafe.service;
 
 import com.example.cafe.dto.request.CafeRequest;
 import com.example.cafe.dto.response.CafeResponse;
-import com.example.cafe.excrption.CafeErrorCode;
-import com.example.cafe.excrption.CafeException;
+import com.example.cafe.excrption.NotFoundCafeException;
 import com.example.cafe.global.domain.entity.Cafe;
 import com.example.cafe.global.domain.repository.CafeRepository;
 import jakarta.transaction.Transactional;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,7 +49,7 @@ public class CafeServiceImpl implements CafeService {
     @Override
     public CafeResponse getCafeByCafeId(Long cafeId) {
         Optional<Cafe> byCafeId = cafeRepository.findById(cafeId);
-        Cafe cafe = byCafeId.orElseThrow(()-> new CafeException(CafeErrorCode.CAFE_NOT_FOUND));
+        Cafe cafe = byCafeId.orElseThrow(NotFoundCafeException::new);
         return CafeResponse.from(cafe);
     }
 }
